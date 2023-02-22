@@ -2,8 +2,10 @@ title = 'DDSAGAY - TechDocs Site'
 baseURL = "/"
 languageCode = 'en-us'
 theme = 'hugo-theme-relearn'
+canonifyURLs = true
+relativeURLs = true
+uglyURLs = true
 
-relativeurls = true
 [outputs]
   home = ["HTML", "RSS", "PRINT", "SEARCH"]
   section = ["HTML", "RSS", "PRINT"]
