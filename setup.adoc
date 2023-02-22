@@ -1,5 +1,7 @@
 = My Setup Instructions
 
+.Setup Scratch Notes
+----
 hugo new site docs-ad-hugo
 cd docs-ad-hugo
 mv config.toml hugo.toml
@@ -71,3 +73,5 @@ relativeurls = true
 [security.exec]
   allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$','^asciidoctor$','^ad$']
 ---
+
+----
