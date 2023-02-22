@@ -1,0 +1,73 @@
+= My Setup Instructions
+
+hugo new site docs-ad-hugo
+cd docs-ad-hugo
+mv config.toml hugo.toml
+hugo mod init github.com/sagayd/docs-ad-hugo
+
+#https://github.com/McShelby/hugo-theme-relearn.git -b 5.11.2
+#hugo mod get github.com/McShelby/hugo-theme-relearn@5.11.2
+wget https://github.com/McShelby/hugo-theme-relearn/archive/refs/tags/5.11.2.zip
+unzip 5.11.2.zip
+mv hugo-theme-relearn-5.11.2/ hugo-theme-relearn
+
+Create these files
+- content/images/opsmx_logo.svg and layouts/partials/logo.html #modifies the top-left logo
+- static/css/style-overrides.css and layouts/partials/custom-header.html #Override CSS values. Modifies the content title formatting
+- static/css/theme-sagaytheme.css #Copy of themes/theme-blue.css to customize my version
+
+Modify hugo.toml
+
+cd docs-ad-hugo
+thisip=`hostname -I | cut -d' ' -f2` && hugo server -D --bind=0.0.0.0 --baseURL=http://$thisip:8080 --port=8080
+
+Sample Site Structure (Only new modifications shown)
+docs-ad-hugo/
+├── content/
+│   ├── argocd/
+│   │   └── _index.adoc
+│   ├── blogs/
+│   │   ├── how-to-deploy-spinnaker.adoc
+│   │   └── _index.adoc
+│   ├── images/
+│   │   └── opsmx_logo.svg
+│   ├── _index.adoc
+│   ├── posts/
+│   │   ├── first.adoc
+│   │   ├── how-to-deploy-spinnaker.adoc
+│   │   └── _index.adoc
+│   └── spinnaker/
+│       └── _index.adoc
+├── layouts/
+│   └── partials/
+│       ├── custom-header.html
+│       └── logo.html
+└── static/
+    └── css/
+        ├── style-overrides.css
+        └── theme-sagaytheme.css
+ 
+ hugo.toml
+ ---
+ title = 'DDSAGAY - TechDocs Site'
+baseURL = "/"
+languageCode = 'en-us'
+theme = 'hugo-theme-relearn'
+
+relativeurls = true
+[outputs]
+  home = ["HTML", "RSS", "PRINT", "SEARCH"]
+  section = ["HTML", "RSS", "PRINT"]
+  page = ["HTML", "RSS", "PRINT"]
+
+[params]
+  author = "Sagayaraj"
+  description = "Sagay's Learnings and Knowledge Base"
+  disableBreadcrumb = false
+  disableLandingPageButton = true
+  # themVariant => "auto","relearn-light", relearn-dark, "red", "blue", "green" or an array like [ "blue", "green" ].
+  themeVariant = [ "sagaytheme", "blue", "red", "green", "relearn-light", "relearn-dark", "neon", "learn", "relearn", "auto" ]
+
+[security.exec]
+  allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$','^asciidoctor$','^ad$']
+---
