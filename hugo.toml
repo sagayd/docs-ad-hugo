@@ -1,0 +1,21 @@
+title = 'DDSAGAY - TechDocs Site'
+baseURL = "/"
+languageCode = 'en-us'
+theme = 'hugo-theme-relearn'
+
+relativeurls = true
+[outputs]
+  home = ["HTML", "RSS", "PRINT", "SEARCH"]
+  section = ["HTML", "RSS", "PRINT"]
+  page = ["HTML", "RSS", "PRINT"]
+
+[params]
+  author = "Sagayaraj"
+  description = "Sagay's Learnings and Knowledge Base"
+  disableBreadcrumb = false
+  disableLandingPageButton = true
+  # themVariant => "auto","relearn-light", relearn-dark, "red", "blue", "green" or an array like [ "blue", "green" ].
+  themeVariant = [ "sagaytheme", "blue", "red", "green", "relearn-light", "relearn-dark", "neon", "learn", "relearn", "auto" ]
+
+[security.exec]
+  allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$','^asciidoctor$','^ad$']

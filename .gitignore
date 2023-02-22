@@ -1,3 +1,8 @@
+# Hugo excludes
+.hugo_build.lock
+bkupdir/
+public/
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

@@ -1,0 +1,14 @@
+---
+title: "How to Deploy Spinnaker"
+date: 2023-02-19T07:34:45Z
+draft: false
+---
+= How to Deploy Spinnaker
+
+Lets check how to deploy Spinnaker
+
+== Requirements
+. Kubernetes Cluster
+. Kubectl CLI
+
+== More to come
