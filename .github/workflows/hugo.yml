@@ -89,6 +89,8 @@ jobs:
           echo -- Start of git commit --
           git commit -m "Update site pages by GH actions"
           echo -- Start of git remote --
+          gh auth setup-git
+          gh auth token
           git remote -v
           echo -- Start of git push --
           git push
