@@ -41,8 +41,8 @@ jobs:
           sudo apt install -y build-essential tree
           sudo apt install -y rubygems ruby-dev
           sudo gem install asciidoctor
-      - name: Install Dart Sass Embedded
-        run: sudo snap install dart-sass-embedded
+      #- name: Install Dart Sass Embedded
+      #  run: sudo snap install dart-sass-embedded
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -53,6 +53,7 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
+          echo Calling: hugo --gc --minify -d ./cd
           hugo \
             --gc --minify -d ./cd \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
@@ -65,18 +66,17 @@ jobs:
         with:
           path: ./cd          
       - name: Push hugo site output to sagayd.github.io
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo HOSTNAME.var is $HOSTNAME
-          echo HOSTNAME.cmd is `hostname`
-          echo PWD.var is $PWD
           echo PWD.cmd is `pwd`
-          echo GHWorkspace.actionvar is ${{ github.workspace }}
-          ls -l ${{ github.workspace }}
+          echo github.workspace is ${{ github.workspace }}
           tree -F -L 1
           cd ..
           echo PWD.cmd is `pwd`
           tree -F -L 1
-          gh repo clone sagayd/sagayd.github.io
+          gh repo clone sagayd/sagayd.github.io 
           cd sagayd.github.io
           ls -l 
           git config --global user.name "sagayd"
