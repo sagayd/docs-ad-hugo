@@ -71,7 +71,9 @@ jobs:
           echo PWD.var is $PWD
           echo PWD.cmd is `pwd`
           echo GHWorkspace.actionvar is ${{ github.workspace }}
-          ls - ${{ github.workspace }}
+          ls -l ${{ github.workspace }}
+          cd ..
+          echo PWD.cmd is `pwd`
           gh repo clone sagayd/sagayd.github.io
           cd sagayd.github.io
           ls -l 
