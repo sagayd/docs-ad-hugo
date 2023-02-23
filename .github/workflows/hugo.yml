@@ -84,6 +84,8 @@ jobs:
           set -x
           git config --global -l
           git add .
+          git status
           git commit -m "Update site pages by GH actions"
+          git remote -v
           git push
       - run: echo "Job completed with status - ${{ job.status }}."  
