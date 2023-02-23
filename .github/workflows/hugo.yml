@@ -54,8 +54,7 @@ jobs:
           HUGO_ENV: production
         run: |
           echo Calling: hugo --gc --minify -d ../cd
-          hugo \
-            --gc --minify -d ./cd \
+          hugo --gc --minify -d ../cd \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
@@ -76,7 +75,9 @@ jobs:
           cd ..
           echo PWD.cmd is `pwd`
           tree -F -L 1
-          gh repo clone sagayd/sagayd.github.io 
+          echo Cloing sagayd.github.io
+          gh repo clone sagayd/sagayd.github.io
+          tree -F -L 1
           cd sagayd.github.io
           echo PWD.cmd is `pwd`
           tree -F -L 1
