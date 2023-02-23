@@ -66,7 +66,6 @@ jobs:
         run: |
           echo HOSTNAME.var is $HOSTNAME
           echo PWD.cmd is `pwd`
-          echo github.workspace is ${{ github.workspace }}
           tree -F -L 1
           cd ..
           echo PWD.cmd is `pwd`
@@ -80,9 +79,9 @@ jobs:
           git config --global user.name "sagayd"
           git config --global user.email "sagayaraj.d@opsmx.io"
           cp -r ../cd ./
-          echo PWD.cmd is `pwd`
-          tree -F -L 1
+          tree -F -L 1 cd/
           echo "Git add, commit, push to sagayd.github.io"
+          set -x
           git add .
           git commit -m "Update site pages by GH actions"
           git push
