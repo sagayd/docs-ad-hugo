@@ -38,7 +38,7 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Install Ruby and AsciiDoctor
         run: |
-          sudo apt install -y build-essential
+          sudo apt install -y build-essential tree
           sudo apt install -y rubygems ruby-dev
           sudo gem install asciidoctor
       - name: Install Dart Sass Embedded
@@ -72,8 +72,10 @@ jobs:
           echo PWD.cmd is `pwd`
           echo GHWorkspace.actionvar is ${{ github.workspace }}
           ls -l ${{ github.workspace }}
+          tree -F -L 1
           cd ..
           echo PWD.cmd is `pwd`
+          tree -F -L 1
           gh repo clone sagayd/sagayd.github.io
           cd sagayd.github.io
           ls -l 
