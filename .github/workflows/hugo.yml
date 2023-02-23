@@ -46,6 +46,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
           submodules: recursive
       - name: Build with Hugo
         env:
@@ -62,7 +63,7 @@ jobs:
       #    path: ./cd     
       - name: Push hugo site output to sagayd.github.io
         env:
-          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo HOSTNAME.var is $HOSTNAME
           echo PWD.cmd is `pwd`
