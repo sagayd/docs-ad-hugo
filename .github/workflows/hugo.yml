@@ -38,10 +38,9 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Install Ruby and AsciiDoctor
         run: |
-          sudo apt update
           sudo apt install -y build-essential
           sudo apt install -y rubygems ruby-dev
-          sudo gem install -y asciidoctor
+          sudo gem install asciidoctor
       - name: Install Dart Sass Embedded
         run: sudo snap install dart-sass-embedded
       - name: Checkout
