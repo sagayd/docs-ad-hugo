@@ -56,14 +56,10 @@ jobs:
           echo Calling: hugo --gc --minify -d ../cd
           hugo --gc --minify -d ../cd \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./cd
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./cd          
+      #- name: Upload artifact
+      #  uses: actions/upload-pages-artifact@v1
+      #  with:
+      #    path: ./cd     
       - name: Push hugo site output to sagayd.github.io
         env:
           GH_TOKEN: ${{ github.token }}
