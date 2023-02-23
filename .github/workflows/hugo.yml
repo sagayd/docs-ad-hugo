@@ -53,7 +53,7 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
-          echo Calling: hugo --gc --minify -d ./cd
+          echo Calling: hugo --gc --minify -d ../cd
           hugo \
             --gc --minify -d ./cd \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
@@ -78,10 +78,15 @@ jobs:
           tree -F -L 1
           gh repo clone sagayd/sagayd.github.io 
           cd sagayd.github.io
-          ls -l 
+          echo PWD.cmd is `pwd`
+          tree -F -L 1
           git config --global user.name "sagayd"
           git config --global user.email "sagayaraj.d@opsmx.io"
-          # git add .
-          # git commit -m "Developper_commits"
-          # git push
-      - run: echo "🍏 This job's status is ${{ job.status }}."  
+          cp -r ../cd ./
+          echo PWD.cmd is `pwd`
+          tree -F -L 1
+          echo "Git add, commit, push to sagayd.github.io"
+          git add .
+          git commit -m "Update site pages by GH actions"
+          git push
+      - run: echo "Job completed with status - ${{ job.status }}."  
