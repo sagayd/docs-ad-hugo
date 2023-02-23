@@ -82,6 +82,7 @@ jobs:
           tree -F -L 1 cd/
           echo "Git add, commit, push to sagayd.github.io"
           set -x
+          git config --global -l
           git add .
           git commit -m "Update site pages by GH actions"
           git push
