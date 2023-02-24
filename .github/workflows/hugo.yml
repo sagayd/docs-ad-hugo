@@ -1,0 +1,98 @@
+# Sample workflow for building and deploying a Hugo site to GitHub Pages
+name: Deploy Hugo site to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.110.0
+    steps:
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+      - name: Install Ruby and AsciiDoctor
+        run: |
+          sudo apt install -y build-essential tree
+          sudo apt install -y rubygems ruby-dev
+          sudo gem install asciidoctor
+      #- name: Install Dart Sass Embedded
+      #  run: sudo snap install dart-sass-embedded
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          submodules: recursive
+      - name: Build with Hugo
+        env:
+          # For maximum backward compatibility with Hugo modules
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          echo Calling: hugo --gc --minify -d ../cd
+          hugo --gc --minify -d ../cd \
+            --baseURL "${{ steps.pages.outputs.base_url }}/"
+      #- name: Upload artifact
+      #  uses: actions/upload-pages-artifact@v1
+      #  with:
+      #    path: ./cd     
+      - name: Push hugo site output to sagayd.github.io
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          echo HOSTNAME.var is $HOSTNAME
+          echo PWD.cmd is `pwd`
+          tree -F -L 1
+          cd ..
+          echo PWD.cmd is `pwd`
+          tree -F -L 1
+          echo Cloing sagayd.github.io
+          gh repo clone sagayd/sagayd.github.io
+          tree -F -L 1
+          cd sagayd.github.io
+          echo PWD.cmd is `pwd`
+          tree -F -L 1
+          git config --global user.name "sagayd"
+          git config --global user.email "sagayaraj.d@opsmx.io"
+          cp -r ../cd ./
+          tree -F -L 1 cd/
+          echo "Git add, commit, push to sagayd.github.io"
+          set -x
+          git config --global -l
+          git add .
+          echo -- Start of git status --
+          git status
+          echo -- Start of git commit --
+          git commit -m "Update site pages by GH actions"
+          echo -- Start of git remote --
+          gh auth setup-git
+          gh auth token
+          git remote -v
+          echo -- Start of git push --
+          git push
+      - run: echo "Job completed with status - ${{ job.status }}."  
