@@ -21,8 +21,8 @@ enableRobotsTXT = true
 [outputs]
 #  home = ["HTML", "RSS", "PRINT", "SEARCH"]
 #  section = ["HTML", "RSS", "PRINT"]
-#  page = ["HTML", "RSS", "PRINT"]
- page = ["HTML"]
+  page = ["HTML", "RSS", "PRINT"] #Need all links with uglyURLs (uglyURLs = true)
+# page = ["HTML"]
 
 [params]
   author = "Sagayaraj"
