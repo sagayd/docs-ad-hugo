@@ -1,5 +1,5 @@
 ---
-title: "ArgoCD Home"
+title: "ArgoCD"
 date: 2023-02-19T10:55:45Z
 draft: false
 ---
