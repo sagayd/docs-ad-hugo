@@ -5,7 +5,7 @@ theme = 'hugo-theme-relearn'
 canonifyURLs = true
 relativeURLs = true
 cleanDestinationDir = true
-uglyURLs = true
+uglyURLs = false
 # notBizarreAndInsaneURLs = true
 # publishDir = '../wwwroot'
 timeZone = 'Asia/Kolkata'
@@ -19,8 +19,8 @@ enableRobotsTXT = true
 #  disableXML = false
 
 [outputs]
-#  home = ["HTML", "RSS", "PRINT", "SEARCH"]
-#  section = ["HTML", "RSS", "PRINT"]
+  home = ["HTML", "RSS", "PRINT", "SEARCH"]
+  section = ["HTML", "RSS", "PRINT"]
   page = ["HTML", "RSS", "PRINT"] #Need all links with uglyURLs (uglyURLs = true)
 # page = ["HTML"]
 
